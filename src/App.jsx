@@ -2,9 +2,18 @@ import React, { useState, useEffect } from 'react';
 import List from './list';
 import Alert from './alert';
 
+const getLocalStorage = ()=>{
+  let list = localStorage.getItem('list')
+  if(list){
+    return(list = JSON.parse(localStorage.getItem('list')))
+  }else{
+    return[]
+  }
+}
+
 function App() {
   const [name, setName] = useState('')
- const [list, setList] = useState('')
+ const [list, setList] = useState(getLocalStorage())
   const [isEditing, setIsEditing] = useState(false)
    const [editID, setEditID] = useState(null)
     const [alert, setAlert] = useState({show:false, msg:'', type:'', })
@@ -58,13 +67,13 @@ const clearList = ()=> {
   }, [list])
 
  return(
-  <section className='section-center'>
+  <section className='section-center shadow-lg items-center text-center p-10 m-5 md:m-40'>
     <form className='grocery-form' onSubmit={handleSubmit}>
-      <h3>Grocery Bud</h3>
-      <div className='underline'></div>
-      <div className='form-control'>
-    <input type="text" className='grocery' placeholder='e.g eggs' value={name} onChange={(e)=> setName(e.target.value)}  />
-     <button type='submit' className='submit-btn'>{isEditing ? 'edit' : 'submit'}  </button>
+      <h3 className='text-2xl font-bold'>Grocery Bud</h3>
+      <div className='underline border-2 border-green-400 mx-30 md:mx-90'></div>
+      <div className='form-control p-4'>
+    <input type="text" className='grocery border rounded p-1 ' placeholder='e.g eggs' value={name} onChange={(e)=> setName(e.target.value)}  />
+     <button type='submit' className='submit-btn bg-green-400 p-1 rounded text-white font-bold shadow-md capitalize'>{isEditing ? 'edit' : 'submit'}  </button>
       </div>
     </form>
     {list.length > 0 && (
