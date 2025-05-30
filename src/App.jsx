@@ -21,7 +21,7 @@ function App() {
     const handleSubmit = (e) => {
       e.preventDefault()
       if(!name){
-        showaAlert(true, 'danger' , 'please enter value')
+        showAlert(true, 'danger' , 'please enter value')
       }else if(name && isEditing){
         setList(
           list.map((item) => {
@@ -44,12 +44,12 @@ function App() {
     }
  }
 
- const showAlert = (show = false, type ='', msg='',) =>{
+ const showAlert = (show = false, type ='', msg='') =>{
   setAlert({show,type,msg})
  }
 const clearList = ()=> {
-  showAlert(true, 'danger' , 'item removed')
-  setList(list.filter((item)=> item.id != id))
+ showAlert(true, 'danger', 'empty list' )
+ setList([])
 }
   const removeItem = (id) => {
     showAlert(true, 'danger', 'item removed');
@@ -69,17 +69,18 @@ const clearList = ()=> {
  return(
   <section className='section-center shadow-lg items-center text-center p-10 m-5 md:m-40'>
     <form className='grocery-form' onSubmit={handleSubmit}>
+      {alert.show && <Alert {...alert} removeAlert={showAlert} list={list} />}
       <h3 className='text-2xl font-bold'>Grocery Bud</h3>
       <div className='underline border-2 border-green-400 mx-30 md:mx-90'></div>
       <div className='form-control p-4'>
     <input type="text" className='grocery border rounded p-1 ' placeholder='e.g eggs' value={name} onChange={(e)=> setName(e.target.value)}  />
-     <button type='submit' className='submit-btn bg-green-400 p-1 rounded text-white font-bold shadow-md capitalize'>{isEditing ? 'edit' : 'submit'}  </button>
+     <button type='submit' className='submit-btn bg-green-400 p-1 rounded text-white font-bold shadow-md capitalize hover:bg-green-300'>{isEditing ? 'edit' : 'submit'}  </button>
       </div>
     </form>
     {list.length > 0 && (
-      <div className='grocery-container'>
+      <div className='grocery-container '>
          <List items={list} removeItem={removeItem} editItem={editItem} />
-          <button className='clear-btn' onClick={clearList}>
+          <button className='clear-btn p-1 bg-red-500  text-white font-bold rounded hover:bg-red-400 capitalize' onClick={clearList}>
             clear items
           </button>
       </div>

@@ -1,1 +1,29 @@
 @import "tailwindcss";
+.alert {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  display: grid;
+  font-size: 18px;
+  align-items: center;
+  text-align: center;
+  font-size: 0.7rem;
+  border-radius: 0.25rem;
+ 
+  text-transform: capitalize;
+}
+.alert-danger {
+ color: black;
+ border-top: 4px solid red;
+ background-color: white;
+ font-weight: bolder;
+ font-size: 18px;
+ box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.alert-success {
+  color: black;
+ border-top: 4px solid green;
+ background-color: white;
+ font-weight: bolder;
+ font-size: 18px;
+ box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
