@@ -42,6 +42,10 @@ const clearList = ()=> {
   showAlert(true, 'danger' , 'item removed')
   setList(list.filter((item)=> item.id != id))
 }
+  const removeItem = (id) => {
+    showAlert(true, 'danger', 'item removed');
+    setList(list.filter((item) => item.id !== id));
+  };
   const editItem = (id) => {
     const specificItem = list.find((item) => item.id === id);
     setIsEditing(true);
@@ -59,9 +63,20 @@ const clearList = ()=> {
       <h3>Grocery Bud</h3>
       <div className='underline'></div>
       <div className='form-control'>
-    <input type="text" className='grocery' placeholder='e.g eggs' value={name}  />
+    <input type="text" className='grocery' placeholder='e.g eggs' value={name} onChange={(e)=> setName(e.target.value)}  />
+     <button type='submit' className='submit-btn'>{isEditing ? 'edit' : 'submit'}  </button>
       </div>
     </form>
+    {list.length > 0 && (
+      <div className='grocery-container'>
+         <List items={list} removeItem={removeItem} editItem={editItem} />
+          <button className='clear-btn' onClick={clearList}>
+            clear items
+          </button>
+      </div>
+    )
+
+    }
 
   </section>
  )
